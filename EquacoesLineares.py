@@ -36,9 +36,9 @@ def GaussSeidel3V(f1, f2, f3, e):
 
     while True:
         # calculo dos novos valores
-        x1 = f1(x0, y0, z0, w0)
-        y1 = f2(x1, y0, z0, w0)
-        z1 = f3(x1, y1, z0, w0)
+        x1 = f1(x0, y0, z0)
+        y1 = f2(x1, y0, z0)
+        z1 = f3(x1, y1, z0)
 
         # erro
         erro1 = abs(x1 - x0)
@@ -54,6 +54,28 @@ def GaussSeidel3V(f1, f2, f3, e):
             break
 
     return [x0, y0, z0]
+
+def GaussSeidel2V(f1, f2, e):
+    x0 = 0
+    y0 = 0
+
+    while True:
+        # calculo dos novos valores
+        x1 = f1(x0, y0)
+        y1 = f2(x1, y0)
+
+        # erro
+        erro1 = abs(x1 - x0)
+        erro2 = abs(y1 - y0)
+
+        # atribuição dos novos valores
+        x0 = x1
+        y0 = y1
+
+        if erro1 < e and erro2 < e:
+            break
+
+    return [x0, y0]
 
 
 f1 = lambda x, y, z, w: (-(7.89 * y) - (4.95 * z) - (6.36 * w) + 32.67) / 23.21
